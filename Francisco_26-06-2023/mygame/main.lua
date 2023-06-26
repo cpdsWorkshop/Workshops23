@@ -4,6 +4,8 @@ function love.load()
     posicaoX = 0
     posicaoY = 0
     velocidade = 1
+    missilImagem = love.graphics.newImage("missil1.png")
+    misseis = {}
 end
 
 
@@ -11,6 +13,9 @@ function love.draw()
     love.graphics.print("Ola seu gay!", 50, 50);
     --Escreve o cÃ³digo para desenhar a imagem na linha baixo
     love.graphics.draw(imagem, posicaoX, posicaoY, 0, 1, 1)
+    for index, missil in ipairs(misseis) do
+        love.graphics.draw(missil.imagem, missil.posicaoX,missil.posicaoY)
+    end
 end
 
 function love.update(dt)
@@ -34,4 +39,9 @@ function love.update(dt)
             posicaoY = posicaoY - velocidade
         end
     end
+    if love.keyboard.isDown("space") then
+        missil = {posicaoX = posicaoX, posicaoY = posicaoY, velocidade = 300, imagem = missilImagem}
+        table.insert(misseis, missil)
+    end
+
 end
