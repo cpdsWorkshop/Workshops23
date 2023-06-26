@@ -19,18 +19,18 @@ function love.update(dt)
         end
     end
     if posicaoX > 0 then
-    if love.keyboard.isDown("left") then
-        posicaoX = posicaoX -1
+        if love.keyboard.isDown("left") then
+            posicaoX = posicaoX -1
+        end
     end
-end
     if posicaoY <(love.graphics.getHeight()- imagem:getHeight()) then
-    if love.keyboard.isDown("down") then
-        posicaoY = posicaoY +1
+        if love.keyboard.isDown("down") then
+            posicaoY = posicaoY +1
+        end
     end
-end
-if posicaoY > 0 then
-    if love.keyboard.isDown("up") then
-        posicaoY = posicaoY -1
+    if posicaoY > 0 then
+        if love.keyboard.isDown("up") then
+            posicaoY = posicaoY -1
+        end
     end
-end
 end
