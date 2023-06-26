@@ -9,6 +9,9 @@ function love.load()
 
     missilVelocidade = 250
     podeDisparar = true
+
+    missilTempoMax = 0.2
+    missilTempo = missilTempoMax
 end
 
 
@@ -43,22 +46,30 @@ function love.update(dt)
         end
     end
     if love.keyboard.isDown("space") then
-    if(left) then
-        missilVelocidade = missilVelocidade - velocidade/2
-    elseif(right) then
-        missilVelocidade = missilVelocidade + velocidade/2
-    end
-    if podeDisparar then
-        missil = {
+        if(left) then
+            missilVelocidade = missilVelocidade - velocidade/2
+        elseif(right) then
+            missilVelocidade = missilVelocidade + velocidade/2
+        end
+        if podeDisparar then
+            missil = {
             posicaoX = posicaoX + 64,
             posicaoY = posicaoY + 32,
             width = 16, height=16,
             velocidade = missilVelocidade,
             imagem = missilImagem}
-        table.insert(misseis, missil)
+            table.insert(misseis, missil)
+            podeDisparar = false
+            missilTempo = missilTempoMax
+        end
     end
-end
-atualizarMisseis(dt)
+
+    if missilTempo > 0 then
+        missilTempo = missilTempo - dt
+    else
+        podeDisparar = true
+    end
+    atualizarMisseis(dt)
 
 end
 
