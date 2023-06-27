@@ -13,6 +13,11 @@ function love.draw()
 end
 
 function love.update(dt)
+    if posicaoY > 0 then
+        if love.keyboard.isDown("up") then
+            posicaoY = posicaoY - velocidade
+        end
+    end
     if posicaoX < (love.graphics.getWidth() - imagem:getWidth()) then
         if love.keyboard.isDown("right") then
             posicaoX = posicaoX +  velocidade
@@ -28,9 +33,5 @@ function love.update(dt)
             posicaoY = posicaoY + velocidade
         end
     end
-    if posicaoY > 0 then
-        if love.keyboard.isDown("up") then
-            posicaoY = posicaoY - velocidade
-        end
-    end
+   
 end
