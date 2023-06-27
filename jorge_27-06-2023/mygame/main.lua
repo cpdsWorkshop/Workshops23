@@ -9,6 +9,9 @@ function love.load()
 misseis = {}
 missilVelocidade = 250
 podeDisparar = true
+
+missilTempoMax = 0.2
+missilTempo = missilTempoMax
 end
 
 
@@ -31,6 +34,8 @@ function love.update(dt)
           missilVelocidade = missilVelocidade + velocidade/2
         end
         if podeDisparar then
+            podeDisparar = false
+            missilTempo = missilTempoMax
             missil = {
                 posicaoX = posicaoX + 64,
                 posicaoY = posicaoY + 32,
@@ -41,7 +46,11 @@ function love.update(dt)
         end
     end
     atualizarMisseis(dt)
-
+    if missilTempo > 0 then
+        missilTempo = missilTempo - dt
+      else
+        podeDisparar = true
+      end
     if posicaoY > 0 then
         if love.keyboard.isDown("up") then
             posicaoY = posicaoY - velocidade
