@@ -3,6 +3,7 @@ function love.load()
     imagem = love.graphics.newImage("nave1.png")
     posicaoX = 0
   posicaoY = 0
+  velocidade = 15
 end
 
 
@@ -14,22 +15,22 @@ end
 function love.update(dt)
     if posicaoX < (love.graphics.getWidth() - imagem:getWidth()) then
         if love.keyboard.isDown("right") then
-            posicaoX = posicaoX + 15
+            posicaoX = posicaoX +  velocidade
         end
     end
     if posicaoX > 0 then
         if love.keyboard.isDown("left") then
-            posicaoX = posicaoX - 15
+            posicaoX = posicaoX - velocidade
         end
     end
     if posicaoY <(love.graphics.getHeight() - imagem:getHeight()) then
         if love.keyboard.isDown("down") then
-            posicaoY = posicaoY + 15
+            posicaoY = posicaoY + velocidade
         end
     end
     if posicaoY > 0 then
         if love.keyboard.isDown("up") then
-            posicaoY = posicaoY - 15
+            posicaoY = posicaoY - velocidade
         end
     end
 end
