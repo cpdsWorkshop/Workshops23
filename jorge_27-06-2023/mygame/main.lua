@@ -12,6 +12,12 @@ podeDisparar = true
 
 missilTempoMax = 0.2
 missilTempo = missilTempoMax
+
+
+ImagemInimigo = love.graphics.newImage("inimigo1.png")
+inimigos = {}
+geraInimigoTempo = 0
+geraInimigoTempoMax = 0.5
 end
 
 
@@ -23,6 +29,10 @@ function love.draw()
         love.graphics.draw(missil.imagem, missil.posicaoX,
     missil.posicaoY)
     end
+    for index, inimigo in ipairs(inimigos) do
+        love.graphics.draw(inimigo.img, inimigo.posicaoX,
+     inimigo.posicaoY)
+     end
 end
 
 function love.update(dt)
@@ -71,7 +81,7 @@ function love.update(dt)
             posicaoY = posicaoY + velocidade
         end
     end
-   
+    atualizarInimigos(dt)
 end
 
 function atualizarMisseis(dt)
@@ -81,3 +91,20 @@ function atualizarMisseis(dt)
     missil.velocidade
      end
     end
+
+    function atualizarInimigos(dt)
+        geraInimigoTempo = geraInimigoTempo - dt
+        if geraInimigoTempo <= 0 then
+         geraInimigoTempo = geraInimigoTempoMax
+         y = love.math.random(0, love.graphics.getHeight() - 64)
+         inimigo = {posicaoX = love.graphics.getWidth(), posicaoY
+       = y, width = 64, height = 64, velocidade = 100, img =
+       ImagemInimigo}
+         table.insert(inimigos, inimigo)
+        end
+        for i = #inimigos, 1, -1 do
+         inimigo = inimigos[i]
+         inimigo.posicaoX = inimigo.posicaoX - inimigo.velocidade
+       * dt
+        end
+       end
