@@ -7,7 +7,8 @@ function love.load()
 
   missilImagem = love.graphics.newImage("missil1.png")
 misseis = {}
-
+missilVelocidade = 250
+podeDisparar = true
 end
 
 
@@ -24,11 +25,23 @@ end
 function love.update(dt)
 
     if love.keyboard.isDown("space") then
-        missil = {posicaoX = posicaoX, posicaoY = posicaoY,
-    velocidade = 300, imagem = missilImagem}
-        table.insert(misseis, missil)
+        if(left) then
+          missilVelocidade = missilVelocidade - velocidade/2
+        elseif(right) then
+          missilVelocidade = missilVelocidade + velocidade/2
+        end
+        if podeDisparar then
+            missil = {
+                posicaoX = posicaoX + 64,
+                posicaoY = posicaoY + 32,
+                width = 16, height=16,
+                velocidade = missilVelocidade,
+                imagem = missilImagem}
+            table.insert(misseis, missil)
+        end
     end
-    
+    atualizarMisseis(dt)
+
     if posicaoY > 0 then
         if love.keyboard.isDown("up") then
             posicaoY = posicaoY - velocidade
@@ -51,3 +64,11 @@ function love.update(dt)
     end
    
 end
+
+function atualizarMisseis(dt)
+    for i=table.getn(misseis), 1, -1 do
+      missil = misseis[i]
+      missil.posicaoX = missil.posicaoX + dt *
+    missil.velocidade
+     end
+    end
