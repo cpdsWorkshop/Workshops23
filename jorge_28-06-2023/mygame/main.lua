@@ -1,1 +1,4 @@
---Ã‰ aqui onde comeÃ§a a tua aventura
+function love.draw()
+        love.graphics.print("Ola mundo!", 100, 100);
+end
+
