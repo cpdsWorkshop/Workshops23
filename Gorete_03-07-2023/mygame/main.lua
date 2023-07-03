@@ -1,13 +1,22 @@
 function love.load()
     imagem = love.graphics.newImage("nave1.png");
+
     posicaoX = 300;
     posicaoY = 300;
+
     velocidade = 5;
+
+    missilImagem = love.graphics.newImage("missil1.png");
+    misseis = {};
 end
 
 
 function love.draw()
     love.graphics.draw(imagem, posicaoX, posicaoY, 0, 1, 1);
+
+    for index, missil in ipairs(misseis) do
+        love.graphics.draw(missil.imagem, missil.posicaoX, missil.posicaoY)
+    end
 end
 
 function love.update(dt)
@@ -35,4 +44,9 @@ function love.update(dt)
         end
     end
     
+    if love.keyboard.isDown("space") then
+        missil = {posicaoX = posicaoX, posicaoY = posicaoY, velocidade = 300, imagem = missilImagem}
+        table.insert(misseis, missil)
+    end
+
 end
