@@ -11,16 +11,27 @@ end
 
 function love.update(dt)
     if love.keyboard.isDown("right") then
-        posicaoX = posicaoX + 1
+        if posicaoX < (love.graphics.getWidth() - imagem:getWidth()) then 
+            posicaoX = posicaoX + 5
+        end
     end
+
     if love.keyboard.isDown("left") then
-        posicaoX = posicaoX - 1
+        if posicaoX > 0 then 
+            posicaoX = posicaoX - 5
+        end
     end
+
     if love.keyboard.isDown("down") then
-        posicaoY = posicaoY + 1
+        if posicaoY < (love.graphics.getHeight() - imagem:getHeight()) then
+        posicaoY = posicaoY + 5
+        end
     end
+
     if love.keyboard.isDown("up") then
-        posicaoY = posicaoY - 1
+        if posicaoY > 0 then 
+            posicaoY = posicaoY - 5
+        end
     end
     
 end
