@@ -116,7 +116,7 @@ function atualizarInimigos(dt)
     end
 end
 
-function verificaJogadorInimigoColisao()
+function verificaJogadorInpimigoColisao()
     for index, inimigo in ipairs(inimigos) do
         if intercepta(posicaoX, posicaoY, 47, 50, inimigo.posicaoX, inimigo.posicaoY, inimigo.width, inimigo.height) then
             posicaoX = 0
