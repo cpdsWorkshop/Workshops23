@@ -87,6 +87,7 @@ function love.update(dt)
     atualizarMisseis(dt)
     atualizarInimigos(dt)
     verificaJogadorInimigoColisao()
+    verificaMissilInimigoColisao()
 end
 
 function atualizarMisseis(dt)
@@ -129,5 +130,17 @@ function intercepta(x1, y1, w1, h1, x2, y2, w2, h2)
     x1 + w1 > x2 and
     y1 < y2 + h2 and
     y1 + h1 > y2
+end
+
+function verificaMissilInimigoColisao()
+    for index, inimigo in ipairs(inimigos) do
+        for index2, missil in ipairs(misseis) do
+            if intercepta(missil.posicaoX, missil.posicaoY, missil.width, missil.height, inimigo.posicaoX, inimigo.posicaoY, inimigo.width, inimigo.height) then
+                table.remove(inimigos, index)
+                table.remove(misseis, index2)
+                break
+            end
+        end
+    end
 end
 
