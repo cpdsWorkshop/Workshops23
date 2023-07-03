@@ -20,6 +20,11 @@ function love.load()
     geraInimigoTempo = 0;
     geraInimigoTempoMax = 1;
 
+    ImagemInimigo1 = love.graphics.newImage("inimigo3.png");
+    inimigos1 = {};
+    geraInimigoTempo1 = 0;
+    geraInimigoTempoMax1 = 1;
+
 end
 
 
