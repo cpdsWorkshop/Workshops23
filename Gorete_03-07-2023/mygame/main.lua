@@ -18,7 +18,7 @@ function love.load()
     ImagemInimigo = love.graphics.newImage("inimigo2.png");
     inimigos = {};
     geraInimigoTempo = 0;
-    geraInimigoTempoMax = 0.5;
+    geraInimigoTempoMax = 1;
 
 end
 
@@ -86,6 +86,7 @@ function love.update(dt)
     end
     atualizarMisseis(dt)
     atualizarInimigos(dt)
+    verificaJogadorInimigoColisao()
 end
 
 function atualizarMisseis(dt)
@@ -108,3 +109,25 @@ function atualizarInimigos(dt)
         inimigo.posicaoX = inimigo.posicaoX - inimigo.velocidade * dt
     end
 end
+
+function verificaJogadorInimigoColisao()
+    for index, inimigo in ipairs(inimigos) do
+        if intercepta(posicaoX, posicaoY, 47, 50, inimigo.posicaoX, inimigo.posicaoY, inimigo.width, inimigo.height) then
+            posicaoX = 0
+            posicaoY = 0
+            misseis = {}
+            inimigos = {}
+            podeDisparar = true
+            missilTempo = missilTempoMax
+            geraInimigoTempo = 0
+        end
+    end
+end
+
+function intercepta(x1, y1, w1, h1, x2, y2, w2, h2)
+    return x1 < x2 + w2 and
+    x1 + w1 > x2 and
+    y1 < y2 + h2 and
+    y1 + h1 > y2
+end
+
