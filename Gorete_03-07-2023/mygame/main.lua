@@ -1,6 +1,6 @@
 function love.load()
     imagem = love.graphics.newImage("nave3.png");
-
+--fregegrg
     posicaoX = 300;
     posicaoY = 300;
 
